@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "80899794527",
+    "firebase_url": "https://habit-tracker-76787-default-rtdb.firebaseio.com",
+    "project_id": "habit-tracker-76787",
+    "storage_bucket": "habit-tracker-76787.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80899794527:android:faebaf447e84580f279dea",
+        "android_client_info": {
+          "package_name": "com.abhyas.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80899794527-lvh8vbsuvpat16bs2hp6rksuobv76j5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_O21iPjPHRrtTQZ7CsEgWCYpSCfzG2Ds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80899794527-lvh8vbsuvpat16bs2hp6rksuobv76j5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
