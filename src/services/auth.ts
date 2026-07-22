@@ -2,10 +2,7 @@ import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
-  signOut,
-  GoogleAuthProvider,
-  GithubAuthProvider,
-  signInWithPopup
+  signOut
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from './firebaseConfig';
@@ -36,62 +33,6 @@ export const login = async (email: string, password: string) => {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     return { success: true, user: userCredential.user };
-  } catch (error: any) {
-    return { success: false, error: error.message };
-  }
-};
-
-export const signInWithGoogle = async () => {
-  try {
-    const provider = new GoogleAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-
-    // Check if user exists in Firestore, if not create them
-    const docRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(docRef);
-    
-    if (!docSnap.exists()) {
-      await setDoc(docRef, {
-        fullName: user.displayName || 'Google User',
-        email: user.email,
-        createdAt: new Date().toISOString(),
-        theme: 'dark', // default theme
-        currentStreak: 0,
-        longestStreak: 0,
-        lastActiveDate: new Date().toISOString().split('T')[0]
-      });
-    }
-
-    return { success: true, user };
-  } catch (error: any) {
-    return { success: false, error: error.message };
-  }
-};
-
-export const signInWithGithub = async () => {
-  try {
-    const provider = new GithubAuthProvider();
-    const result = await signInWithPopup(auth, provider);
-    const user = result.user;
-
-    // Check if user exists in Firestore, if not create them
-    const docRef = doc(db, "users", user.uid);
-    const docSnap = await getDoc(docRef);
-    
-    if (!docSnap.exists()) {
-      await setDoc(docRef, {
-        fullName: user.displayName || 'GitHub User',
-        email: user.email,
-        createdAt: new Date().toISOString(),
-        theme: 'dark', // default theme
-        currentStreak: 0,
-        longestStreak: 0,
-        lastActiveDate: new Date().toISOString().split('T')[0]
-      });
-    }
-
-    return { success: true, user };
   } catch (error: any) {
     return { success: false, error: error.message };
   }
@@ -128,3 +69,4 @@ export const getUserProfile = async (uid: string) => {
     return { success: false, error: error.message };
   }
 };
+

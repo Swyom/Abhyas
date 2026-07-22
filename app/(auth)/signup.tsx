@@ -46,6 +46,8 @@ export default function SignupScreen() {
     }
   };
 
+
+
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
       <KeyboardAvoidingView 
@@ -146,6 +148,8 @@ export default function SignupScreen() {
             >
               <Text style={styles.buttonText}>{loading ? 'Signing up...' : 'Sign Up'}</Text>
             </TouchableOpacity>
+
+
             
             <View style={styles.footer}>
               <Text style={{ color: theme.textSecondary, fontFamily: typography.fonts.regular }}>Already have an account? </Text>
@@ -236,6 +240,34 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+  divider: {
+    flex: 1,
+    height: 1,
+  },
+  dividerText: {
+    marginHorizontal: 16,
+    fontFamily: typography.fonts.regular,
+    fontSize: typography.sizes.sm,
+  },
+  socialContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 16,
+    marginBottom: 32,
+  },
+  socialButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },

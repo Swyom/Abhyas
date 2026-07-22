@@ -21,15 +21,38 @@ export default function ForgotPasswordScreen() {
       Alert.alert('Error', 'Please enter your email address');
       return;
     }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email.trim())) {
+      Alert.alert('Invalid Email', 'Please enter a valid email address.');
+      return;
+    }
+
     setLoading(true);
-    const result = await resetPassword(email);
+    const result = await resetPassword(email.trim());
     setLoading(false);
     
     if (result.success) {
-      Alert.alert('Success', 'Password reset link sent to your email.');
-      router.back();
+      Alert.alert(
+        'Success', 
+        'If this email is registered, you will receive a link to reset your password shortly.',
+        [{ text: 'OK', onPress: () => router.back() }]
+      );
     } else {
-      Alert.alert('Error', result.error);
+      let errorMessage = 'Could not send reset email. Please try again later.';
+      if (result.error) {
+        if (result.error.includes('auth/invalid-email') || result.error.includes('invalid-email')) {
+          errorMessage = 'The email address is badly formatted.';
+        } else if (result.error.includes('auth/user-not-found') || result.error.includes('user-not-found')) {
+          errorMessage = 'There is no account registered with this email.';
+        } else if (result.error.includes('network-request-failed')) {
+          errorMessage = 'Network error. Please check your internet connection.';
+        } else {
+          errorMessage = result.error;
+        }
+      }
+      Alert.alert('Reset Failed', errorMessage);
     }
   };
 
